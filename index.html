@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./src/style.css">
+    <title>Space news</title>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="./public/telescope-svgrepo.svg" alt="space news logo">
+            <span>Space news</span>
+        </div>
+
+        <nav>
+            <form action="" method="get">
+                <input type="search" name="search" placeholder="Search...">
+            </form>
+        </nav>
+    </header>
+    
+    <main>
+
+        <section data-bind="foreach: loadedNews">
+            <article>
+                <img data-bind="attr: { src: imageUrl }">
+                <div>
+                    <h2 data-bind="text: title"></h2>
+                    <p data-bind="text: summary"></p>
+                    <a data-bind="attr: { href: url }, text: 'Read more'"></a>
+                </div>
+            </article>
+        </section>
+
+        <div class="controls">
+            <button class="next" data-bind="click: fetchNextPageNews">Next page</button>
+            <button class="previous" data-bind="click: fetchPreviousPageNews">Previous page</button>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>Space news (dummy website) &copy; 2024</p>
+        <p>Built by Stefan Rotaru</p>
+    </footer>
+
+    <script type='text/javascript' src='node_modules/knockout/build/output/knockout-latest.js'></script>
+    <script type='module' src="./src/index.js"></script>
+</body>
+</html>
