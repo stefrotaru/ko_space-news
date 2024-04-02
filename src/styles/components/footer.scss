@@ -1,0 +1,15 @@
+footer {
+    background: $header-bg;
+    color: $header-color;
+    padding: 1rem;
+    text-align: center;
+    
+    a {
+        font-size: 1.1rem;
+        font-weight: 600;
+        text-decoration: none;
+        background-image: $header-logo-gradient;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+}

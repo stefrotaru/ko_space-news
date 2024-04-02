@@ -10,38 +10,44 @@ function newsArticle(data) {
 }
 
 function AppViewModel() {
+    const self = this;
+
     // Data
-    this.loadedNews = ko.observableArray([]);
-    this.newsLimit = ko.observable(12);
-    this.newsOffset = ko.observable(0);
+    self.isLoading = ko.observable(true);
+    self.loadedNews = ko.observableArray([]);
+    self.newsLimit = ko.observable(12);
+    self.newsOffset = ko.observable(0);
 
     // Load initial state from server
-    this.fetchNews = function () {
-        fetch(`https://api.spaceflightnewsapi.net/v4/articles/?limit=${this.newsLimit()}&offset=${this.newsOffset()}`)
+    self.fetchNews = function () {
+        fetch(`https://api.spaceflightnewsapi.net/v4/articles/?limit=${self.newsLimit()}&offset=${self.newsOffset()}`)
             .then(response => response.json())
             .then(data => {
                 console.log(data)
                 let mappedData = data.results.map(function (article) {
                     return new newsArticle(article);
                 });
-                this.loadedNews(mappedData);
+                self.loadedNews(mappedData);
+                self.isLoading(false);
             });
     };
-    this.fetchNews();
+    self.fetchNews();
 
     // Operations
-    this.fetchNextPageNews = function () {
+    self.fetchNextPageNews = function () {
+        self.isLoading(true);
         // set new offset
-        this.newsOffset(this.newsOffset() + this.newsLimit());
-        
-        this.fetchNews();
+        self.newsOffset(self.newsOffset() + self.newsLimit());
+
+        self.fetchNews();
     };
 
-    this.fetchPreviousPageNews = function () {
+    self.fetchPreviousPageNews = function () {
+        self.isLoading(true);
         // set new offset
-        this.newsOffset(this.newsOffset() - this.newsLimit());
+        self.newsOffset(self.newsOffset() - self.newsLimit());
         
-        this.fetchNews();
+        self.fetchNews();
     };
 };
 

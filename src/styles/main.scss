@@ -1,0 +1,15 @@
+@import './reset.scss';
+@import './variables.scss';
+@import './typography.scss';
+
+@import './components/header.scss';
+@import './components/newsDisplay.scss';
+@import './components/footer.scss';
+
+@import './utils/spinner.scss';
+
+/*-----------------------------------*/
+
+body {
+    display: grid;
+}
