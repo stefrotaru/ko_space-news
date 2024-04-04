@@ -1,3 +1,5 @@
+import './custom_bindings/customBindings.js';
+
 function newsArticle(data) {
     this.id = data.id;
     this.title = data.title;
@@ -10,15 +12,16 @@ function newsArticle(data) {
 }
 
 function AppViewModel() {
-    const self = this;
-
     // Data
+    const self = this;
     self.isLoading = ko.observable(true);
     self.loadedNews = ko.observableArray([]);
     self.newsLimit = ko.observable(12);
     self.newsOffset = ko.observable(0);
 
-    // Load initial state from server
+    self.showMenu = ko.observable(false);
+
+    // Operations
     self.fetchNews = function () {
         fetch(`https://api.spaceflightnewsapi.net/v4/articles/?limit=${self.newsLimit()}&offset=${self.newsOffset()}`)
             .then(response => response.json())
@@ -29,11 +32,10 @@ function AppViewModel() {
                 });
                 self.loadedNews(mappedData);
                 self.isLoading(false);
+                console.log(self.isLoading())
             });
     };
-    self.fetchNews();
 
-    // Operations
     self.fetchNextPageNews = function () {
         self.isLoading(true);
         // set new offset
@@ -49,6 +51,13 @@ function AppViewModel() {
         
         self.fetchNews();
     };
+
+    self.toggleMenu = function () {
+        self.showMenu(!self.showMenu());
+    };
+
+    // Load initial state from server
+    self.fetchNews();
 };
 
 // Activates knockout.js

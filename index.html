@@ -3,45 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./src/styles/main.scss">
+    <link rel="stylesheet" href="./src/style/main.scss">
     <title>Space news</title>
 </head>
 <body>
-    <header>
-        <div class="logo">
+    <header class="header">
+        <div class="header__logo">
             <img src="/telescope-svgrepo.svg" alt="space news logo">
             <span>Space news</span>
         </div>
 
-        <nav>
-            <form action="" method="get">
-                <input type="search" name="search" placeholder="Search...">
-            </form>
+        <form class="header__search-bar" method="get">
+            <input type="search" name="search" placeholder="Search...">
+        </form>
+
+        <nav class="header__menu">
+            <button class="header__menu__button" data-bind="click: toggleMenu, handleActiveClass: showMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="header__menu__sidebar">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Spaceflight launches</a></li>
+                    <li><a href="#">ISS location & astronauts</a></li>
+                    <li><a href="#">Jokes</a></li>
+                </ul>
+            </div>
         </nav>
     </header>
     
     <main>
-
         <div class="spinner" data-bind="visible: isLoading">
             <img src="/loading-svgrepo.svg" alt="Loading...">
         </div>
 
-        <section data-bind="foreach: loadedNews">
-            <article>
-                <img data-bind="attr: { src: imageUrl }">
-                <div>
-                    <h2 data-bind="text: title"></h2>
-                    <p data-bind="text: summary"></p>
-                    <a data-bind="attr: { href: url }, text: 'Read more'"></a>
-                </div>
-            </article>
-        </section>
+        <div class="news-display">           
+            <section data-bind="foreach: loadedNews">
+                <article>
+                    <img data-bind="attr: { src: imageUrl }">
+                    <div>
+                        <h2 data-bind="text: title"></h2>
+                        <p data-bind="text: summary"></p>
+                        <a data-bind="attr: { href: url }, text: 'Read more'"></a>
+                    </div>
+                </article>
+            </section>
 
-        <div class="controls">
-            <button class="next" data-bind="click: fetchNextPageNews">Next page</button>
-            <button class="previous" data-bind="click: fetchPreviousPageNews">Previous page</button>
+            <div class="news-display__controls" data-bind="visible: !isLoading()">
+                <button class="news-display__controls__next" data-bind="click: fetchNextPageNews">Next page</button>
+                <button class="news-display__controls__previous" data-bind="click: fetchPreviousPageNews">Previous page</button>
+            </div>
         </div>
-
     </main>
 
     <footer>
