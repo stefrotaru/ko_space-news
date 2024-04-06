@@ -1,0 +1,107 @@
+.header {
+  &__menu {
+    position: relative;
+
+    display: flex;
+    justify-content: flex-end;
+
+    &__button {
+      cursor: pointer;
+      border: 0;
+      background: 0;
+
+      height: 1.68rem;
+      width: 2rem;
+
+      position: relative;
+      transform: rotate(0deg);
+      transition: 0.5s ease-in-out;
+
+      span {
+        display: block;
+        position: absolute;
+        height: 0.25rem;
+        width: 2rem;
+        background: $header-color;
+        opacity: 1;
+        right: 0;
+        transform: rotate(0deg);
+        transition: 0.25s ease-in-out;
+
+        &:nth-child(1) {
+          top: 0;
+          transform-origin: left center;
+        }
+
+        &:nth-child(2) {
+          top: 0.7rem;
+          transform-origin: left center;
+        }
+
+        &:nth-child(3) {
+          top: 1.4rem;
+          transform-origin: left center;
+        }
+      }
+
+      &.active {
+        span {
+          width: 30px;
+
+          &:nth-child(1) {
+            transform: rotate(45deg);
+            top: 0;
+          }
+
+          &:nth-child(2) {
+            width: 0%;
+            opacity: 0;
+          }
+
+          &:nth-child(3) {
+            transform: rotate(-45deg);
+            top: 1.32rem;
+          }
+        }
+      }
+    }
+
+    &__sidebar {
+      background: $header-bg;
+      color: $header-color;
+      z-index: 2;
+      height: 0;
+      position: absolute;
+      top: calc(100% + 1.7rem);
+      transform: translateX(1rem);
+      
+      opacity: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      div {
+        padding: 1rem 2rem;
+      }
+
+      ul {
+        list-style: none;
+
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        a {
+          color: $header-color;
+          text-decoration: none;
+        }
+      }
+    }
+
+    &__button.active ~ &__sidebar {
+      height: calc(100vh - 5.15rem); // 5.15rem is the height of the header
+      opacity: 1;
+      animation: slide-in .8s ease-in-out;
+    }
+  }
+}

@@ -2,11 +2,14 @@
 @import './variables.scss';
 @import './typography.scss';
 
-@import './components/header.scss';
-@import './components/newsDisplay.scss';
-@import './components/footer.scss';
+@import './layout/header.scss';
+@import './layout/newsDisplay.scss';
+@import './layout/footer.scss';
+@import './layout/sidebar.scss';
 
-@import './utils/spinner.scss';
+@import './components/spinner.scss';
+
+@import './utils/keyframes.scss';
 
 /*-----------------------------------*/
 

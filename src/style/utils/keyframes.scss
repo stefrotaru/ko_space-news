@@ -1,0 +1,10 @@
+@keyframes slide-in {
+  0% {
+    height: 0;
+    opacity: 0;
+  }
+  100% {
+    height: calc(100vh - 5.15rem);
+    opacity: 1;
+  }
+}
